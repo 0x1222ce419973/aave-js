@@ -98,18 +98,6 @@ const _abi = [
       },
       {
         indexed: false,
-        internalType: "string",
-        name: "title",
-        type: "string",
-      },
-      {
-        indexed: false,
-        internalType: "string",
-        name: "description",
-        type: "string",
-      },
-      {
-        indexed: false,
         internalType: "address[]",
         name: "targets",
         type: "address[]",
@@ -155,6 +143,12 @@ const _abi = [
         internalType: "address",
         name: "strategy",
         type: "address",
+      },
+      {
+        indexed: false,
+        internalType: "bytes32",
+        name: "ipfsHash",
+        type: "bytes32",
       },
     ],
     name: "ProposalCreated",
@@ -295,16 +289,6 @@ const _abi = [
         type: "address",
       },
       {
-        internalType: "string",
-        name: "title",
-        type: "string",
-      },
-      {
-        internalType: "string",
-        name: "description",
-        type: "string",
-      },
-      {
         internalType: "address[]",
         name: "targets",
         type: "address[]",
@@ -328,6 +312,11 @@ const _abi = [
         internalType: "bool[]",
         name: "withDelegatecalls",
         type: "bool[]",
+      },
+      {
+        internalType: "bytes32",
+        name: "ipfsHash",
+        type: "bytes32",
       },
     ],
     name: "create",
@@ -408,16 +397,6 @@ const _abi = [
             type: "address",
           },
           {
-            internalType: "string",
-            name: "title",
-            type: "string",
-          },
-          {
-            internalType: "string",
-            name: "description",
-            type: "string",
-          },
-          {
             internalType: "address[]",
             name: "targets",
             type: "address[]",
@@ -481,6 +460,11 @@ const _abi = [
             internalType: "address",
             name: "strategy",
             type: "address",
+          },
+          {
+            internalType: "bytes32",
+            name: "ipfsHash",
+            type: "bytes32",
           },
         ],
         internalType: "struct IAaveGovernanceV2.ProposalWithoutVotes",
