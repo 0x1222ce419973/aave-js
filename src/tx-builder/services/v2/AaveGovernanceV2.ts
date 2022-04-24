@@ -41,7 +41,7 @@ import {
   ProposalRPC,
   Vote,
 } from '../../types/GovernanceV2ReturnTypes';
-// import { getProposalMetadata } from '../../utils/ipfs';
+import { getProposalMetadata } from '../../utils/ipfs';
 import { GovValidator } from '../../validators/methodValidators';
 import {
   Is0OrPositiveAmount,
@@ -54,8 +54,6 @@ const parseProposal = async (rawProposal: ProposalRPC): Promise<Proposal> => {
     id,
     creator,
     executor,
-    title,
-    description,
     targets,
     values,
     signatures,
@@ -69,6 +67,7 @@ const parseProposal = async (rawProposal: ProposalRPC): Promise<Proposal> => {
     executed,
     canceled,
     strategy,
+    ipfsHash: ipfsHex,
     totalVotingSupply,
     minimumQuorum,
     minimumDiff,
@@ -77,13 +76,11 @@ const parseProposal = async (rawProposal: ProposalRPC): Promise<Proposal> => {
     proposalState,
   } = rawProposal;
 
-  // const proposalMetadata = await getProposalMetadata(ipfsHex);
+  const proposalMetadata = await getProposalMetadata(ipfsHex);
   const proposal: Proposal = {
     id: Number(id.toString()),
     creator,
     executor,
-    title,
-    description,
     targets,
     values,
     signatures,
@@ -97,11 +94,14 @@ const parseProposal = async (rawProposal: ProposalRPC): Promise<Proposal> => {
     executed,
     canceled,
     strategy,
+    ipfsHash: proposalMetadata.ipfsHash,
     state: Object.values(ProposalState)[proposalState],
     minimumQuorum: minimumQuorum.toString(),
     minimumDiff: minimumDiff.toString(),
     executionTimeWithGracePeriod: executionTimeWithGracePeriod.toString(),
-    // shortDescription: proposalMetadata.shortDescription,
+    title: proposalMetadata.title,
+    description: proposalMetadata.description,
+    shortDescription: proposalMetadata.shortDescription,
     proposalCreated: Number(proposalCreated.toString()),
     totalVotingSupply: totalVotingSupply.toString(),
   };
