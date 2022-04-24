@@ -23,7 +23,7 @@ interface IGovernanceV2HelperInterface extends ethers.utils.Interface {
   functions: {
     "getProposal(uint256,address)": FunctionFragment;
     "getProposals(uint256,uint256,address)": FunctionFragment;
-    "getTokensPower(address,address[])": FunctionFragment;
+    "getTokensPower(address,address[],address)": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -36,7 +36,7 @@ interface IGovernanceV2HelperInterface extends ethers.utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getTokensPower",
-    values: [string, string[]]
+    values: [string, string[], string]
   ): string;
 
   decodeFunctionResult(
@@ -486,6 +486,7 @@ export class IGovernanceV2Helper extends Contract {
     getTokensPower(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<{
       power: {
@@ -510,9 +511,10 @@ export class IGovernanceV2Helper extends Contract {
       }[];
     }>;
 
-    "getTokensPower(address,address[])"(
+    "getTokensPower(address,address[],address)"(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<{
       power: {
@@ -759,6 +761,7 @@ export class IGovernanceV2Helper extends Contract {
   getTokensPower(
     user: string,
     tokens: string[],
+    governance: string,
     overrides?: CallOverrides
   ): Promise<
     {
@@ -773,9 +776,10 @@ export class IGovernanceV2Helper extends Contract {
     }[]
   >;
 
-  "getTokensPower(address,address[])"(
+  "getTokensPower(address,address[],address)"(
     user: string,
     tokens: string[],
+    governance: string,
     overrides?: CallOverrides
   ): Promise<
     {
@@ -1012,6 +1016,7 @@ export class IGovernanceV2Helper extends Contract {
     getTokensPower(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<
       {
@@ -1026,9 +1031,10 @@ export class IGovernanceV2Helper extends Contract {
       }[]
     >;
 
-    "getTokensPower(address,address[])"(
+    "getTokensPower(address,address[],address)"(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<
       {
@@ -1076,12 +1082,14 @@ export class IGovernanceV2Helper extends Contract {
     getTokensPower(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "getTokensPower(address,address[])"(
+    "getTokensPower(address,address[],address)"(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -1116,12 +1124,14 @@ export class IGovernanceV2Helper extends Contract {
     getTokensPower(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    "getTokensPower(address,address[])"(
+    "getTokensPower(address,address[],address)"(
       user: string,
       tokens: string[],
+      governance: string,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };
