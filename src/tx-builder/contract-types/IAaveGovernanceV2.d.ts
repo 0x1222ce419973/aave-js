@@ -26,7 +26,7 @@ interface IAaveGovernanceV2Interface extends ethers.utils.Interface {
     "__abdicate()": FunctionFragment;
     "authorizeExecutors(address[])": FunctionFragment;
     "cancel(uint256)": FunctionFragment;
-    "create(address,string,string,address[],uint256[],string[],bytes[],bool[])": FunctionFragment;
+    "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)": FunctionFragment;
     "execute(uint256)": FunctionFragment;
     "getGovernanceStrategy()": FunctionFragment;
     "getGuardian()": FunctionFragment;
@@ -60,13 +60,12 @@ interface IAaveGovernanceV2Interface extends ethers.utils.Interface {
     functionFragment: "create",
     values: [
       string,
-      string,
-      string,
       string[],
       BigNumberish[],
       string[],
       BytesLike[],
       boolean[],
+      BytesLike
     ]
   ): string;
   encodeFunctionData(
@@ -191,7 +190,7 @@ interface IAaveGovernanceV2Interface extends ethers.utils.Interface {
     "ExecutorUnauthorized(address)": EventFragment;
     "GovernanceStrategyChanged(address,address)": EventFragment;
     "ProposalCanceled(uint256)": EventFragment;
-    "ProposalCreated(uint256,address,address,string,string,address[],uint256[],string[],bytes[],bool[],uint256,uint256,address)": EventFragment;
+    "ProposalCreated(uint256,address,address,address[],uint256[],string[],bytes[],bool[],uint256,uint256,address,bytes32)": EventFragment;
     "ProposalExecuted(uint256,address)": EventFragment;
     "ProposalQueued(uint256,uint256,address)": EventFragment;
     "VoteEmitted(uint256,address,bool,uint256)": EventFragment;
@@ -249,25 +248,23 @@ export class IAaveGovernanceV2 extends Contract {
 
     create(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
-    "create(address,string,string,address[],uint256[],string[],bytes[],bool[])"(
+    "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)"(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<ContractTransaction>;
 
@@ -313,8 +310,6 @@ export class IAaveGovernanceV2 extends Contract {
         id: BigNumber;
         creator: string;
         executor: string;
-        title: string;
-        description: string;
         targets: string[];
         values: BigNumber[];
         signatures: string[];
@@ -328,24 +323,24 @@ export class IAaveGovernanceV2 extends Contract {
         executed: boolean;
         canceled: boolean;
         strategy: string;
+        ipfsHash: string;
         0: BigNumber;
         1: string;
         2: string;
-        3: string;
-        4: string;
+        3: string[];
+        4: BigNumber[];
         5: string[];
-        6: BigNumber[];
-        7: string[];
-        8: string[];
-        9: boolean[];
+        6: string[];
+        7: boolean[];
+        8: BigNumber;
+        9: BigNumber;
         10: BigNumber;
         11: BigNumber;
         12: BigNumber;
-        13: BigNumber;
-        14: BigNumber;
-        15: boolean;
-        16: boolean;
-        17: string;
+        13: boolean;
+        14: boolean;
+        15: string;
+        16: string;
       };
     }>;
 
@@ -357,8 +352,6 @@ export class IAaveGovernanceV2 extends Contract {
         id: BigNumber;
         creator: string;
         executor: string;
-        title: string;
-        description: string;
         targets: string[];
         values: BigNumber[];
         signatures: string[];
@@ -372,24 +365,24 @@ export class IAaveGovernanceV2 extends Contract {
         executed: boolean;
         canceled: boolean;
         strategy: string;
+        ipfsHash: string;
         0: BigNumber;
         1: string;
         2: string;
-        3: string;
-        4: string;
+        3: string[];
+        4: BigNumber[];
         5: string[];
-        6: BigNumber[];
-        7: string[];
-        8: string[];
-        9: boolean[];
+        6: string[];
+        7: boolean[];
+        8: BigNumber;
+        9: BigNumber;
         10: BigNumber;
         11: BigNumber;
         12: BigNumber;
-        13: BigNumber;
-        14: BigNumber;
-        15: boolean;
-        16: boolean;
-        17: string;
+        13: boolean;
+        14: boolean;
+        15: string;
+        16: string;
       };
     }>;
 
@@ -558,25 +551,23 @@ export class IAaveGovernanceV2 extends Contract {
 
   create(
     executor: string,
-    title: string,
-    description: string,
     targets: string[],
     values: BigNumberish[],
     signatures: string[],
     calldatas: BytesLike[],
     withDelegatecalls: boolean[],
+    ipfsHash: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
-  "create(address,string,stringaddress[],uint256[],string[],bytes[],bool[])"(
+  "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)"(
     executor: string,
-    title: string,
-    description: string,
     targets: string[],
     values: BigNumberish[],
     signatures: string[],
     calldatas: BytesLike[],
     withDelegatecalls: boolean[],
+    ipfsHash: BytesLike,
     overrides?: Overrides
   ): Promise<ContractTransaction>;
 
@@ -605,8 +596,6 @@ export class IAaveGovernanceV2 extends Contract {
     id: BigNumber;
     creator: string;
     executor: string;
-    title: string;
-    description: string;
     targets: string[];
     values: BigNumber[];
     signatures: string[];
@@ -620,24 +609,24 @@ export class IAaveGovernanceV2 extends Contract {
     executed: boolean;
     canceled: boolean;
     strategy: string;
+    ipfsHash: string;
     0: BigNumber;
     1: string;
     2: string;
-    3: string;
-    4: string;
+    3: string[];
+    4: BigNumber[];
     5: string[];
-    6: BigNumber[];
-    7: string[];
-    8: string[];
-    9: boolean[];
+    6: string[];
+    7: boolean[];
+    8: BigNumber;
+    9: BigNumber;
     10: BigNumber;
     11: BigNumber;
     12: BigNumber;
-    13: BigNumber;
-    14: BigNumber;
-    15: boolean;
-    16: boolean;
-    17: string;
+    13: boolean;
+    14: boolean;
+    15: string;
+    16: string;
   }>;
 
   "getProposalById(uint256)"(
@@ -647,8 +636,6 @@ export class IAaveGovernanceV2 extends Contract {
     id: BigNumber;
     creator: string;
     executor: string;
-    title: string;
-    description: string;
     targets: string[];
     values: BigNumber[];
     signatures: string[];
@@ -662,24 +649,24 @@ export class IAaveGovernanceV2 extends Contract {
     executed: boolean;
     canceled: boolean;
     strategy: string;
+    ipfsHash: string;
     0: BigNumber;
     1: string;
     2: string;
-    3: string;
-    4: string;
+    3: string[];
+    4: BigNumber[];
     5: string[];
-    6: BigNumber[];
-    7: string[];
-    8: string[];
-    9: boolean[];
+    6: string[];
+    7: boolean[];
+    8: BigNumber;
+    9: BigNumber;
     10: BigNumber;
     11: BigNumber;
     12: BigNumber;
-    13: BigNumber;
-    14: BigNumber;
-    15: boolean;
-    16: boolean;
-    17: string;
+    13: boolean;
+    14: boolean;
+    15: string;
+    16: string;
   }>;
 
   getProposalState(
@@ -826,25 +813,23 @@ export class IAaveGovernanceV2 extends Contract {
 
     create(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    "create(address,string,string,address[],uint256[],string[],bytes[],bool[])"(
+    "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)"(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -867,53 +852,9 @@ export class IAaveGovernanceV2 extends Contract {
       proposalId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<{
-    id: BigNumber;
-    creator: string;
-    executor: string;
-    title: string;
-    description: string;
-    targets: string[];
-    values: BigNumber[];
-    signatures: string[];
-    calldatas: string[];
-    withDelegatecalls: boolean[];
-    startBlock: BigNumber;
-    endBlock: BigNumber;
-    executionTime: BigNumber;
-    forVotes: BigNumber;
-    againstVotes: BigNumber;
-    executed: boolean;
-    canceled: boolean;
-    strategy: string;
-    0: BigNumber;
-    1: string;
-    2: string;
-    3: string;
-    4: string;
-    5: string[];
-    6: BigNumber[];
-    7: string[];
-    8: string[];
-    9: boolean[];
-    10: BigNumber;
-    11: BigNumber;
-    12: BigNumber;
-    13: BigNumber;
-    14: BigNumber;
-    15: boolean;
-    16: boolean;
-    17: string;
-    }>;
-
-    "getProposalById(uint256)"(
-      proposalId: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<{
       id: BigNumber;
       creator: string;
       executor: string;
-      title: string;
-      description: string;
       targets: string[];
       values: BigNumber[];
       signatures: string[];
@@ -927,24 +868,64 @@ export class IAaveGovernanceV2 extends Contract {
       executed: boolean;
       canceled: boolean;
       strategy: string;
+      ipfsHash: string;
       0: BigNumber;
       1: string;
       2: string;
-      3: string;
-      4: string;
+      3: string[];
+      4: BigNumber[];
       5: string[];
-      6: BigNumber[];
-      7: string[];
-      8: string[];
-      9: boolean[];
+      6: string[];
+      7: boolean[];
+      8: BigNumber;
+      9: BigNumber;
       10: BigNumber;
       11: BigNumber;
       12: BigNumber;
-      13: BigNumber;
-      14: BigNumber;
-      15: boolean;
-      16: boolean;
-      17: string;
+      13: boolean;
+      14: boolean;
+      15: string;
+      16: string;
+    }>;
+
+    "getProposalById(uint256)"(
+      proposalId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<{
+      id: BigNumber;
+      creator: string;
+      executor: string;
+      targets: string[];
+      values: BigNumber[];
+      signatures: string[];
+      calldatas: string[];
+      withDelegatecalls: boolean[];
+      startBlock: BigNumber;
+      endBlock: BigNumber;
+      executionTime: BigNumber;
+      forVotes: BigNumber;
+      againstVotes: BigNumber;
+      executed: boolean;
+      canceled: boolean;
+      strategy: string;
+      ipfsHash: string;
+      0: BigNumber;
+      1: string;
+      2: string;
+      3: string[];
+      4: BigNumber[];
+      5: string[];
+      6: string[];
+      7: boolean[];
+      8: BigNumber;
+      9: BigNumber;
+      10: BigNumber;
+      11: BigNumber;
+      12: BigNumber;
+      13: boolean;
+      14: boolean;
+      15: string;
+      16: string;
     }>;
 
     getProposalState(
@@ -1081,8 +1062,6 @@ export class IAaveGovernanceV2 extends Contract {
       id: null,
       creator: string | null,
       executor: string | null,
-      title: string | null,
-      description: string | null,
       targets: null,
       values: null,
       signatures: null,
@@ -1091,6 +1070,7 @@ export class IAaveGovernanceV2 extends Contract {
       startBlock: null,
       endBlock: null,
       strategy: null,
+      ipfsHash: null
     ): EventFilter;
 
     ProposalExecuted(id: null, initiatorExecution: string | null): EventFilter;
@@ -1138,25 +1118,23 @@ export class IAaveGovernanceV2 extends Contract {
 
     create(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
-    "create(address,string,string,address[],uint256[],string[],bytes[],bool[])"(
+    "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)"(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<BigNumber>;
 
@@ -1323,25 +1301,23 @@ export class IAaveGovernanceV2 extends Contract {
 
     create(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
-    "create(address,string,string,address[],uint256[],string[],bytes[],bool[])"(
+    "create(address,address[],uint256[],string[],bytes[],bool[],bytes32)"(
       executor: string,
-      title: string,
-      description: string,
       targets: string[],
       values: BigNumberish[],
       signatures: string[],
       calldatas: BytesLike[],
       withDelegatecalls: boolean[],
+      ipfsHash: BytesLike,
       overrides?: Overrides
     ): Promise<PopulatedTransaction>;
 
