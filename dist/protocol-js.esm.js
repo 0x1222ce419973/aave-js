@@ -3,8 +3,7 @@ export { BigNumber } from 'bignumber.js';
 import { __decorate, __param, __metadata } from 'tslib';
 import { BigNumber as BigNumber$1, constants, Contract, utils, ethers, providers } from 'ethers';
 import 'reflect-metadata';
-import { base58, formatEther, splitSignature } from 'ethers/lib/utils';
-import axios from 'axios';
+import { formatEther, splitSignature } from 'ethers/lib/utils';
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
   try {
@@ -1893,6 +1892,16 @@ var _abi = [{
     type: "address"
   }, {
     indexed: false,
+    internalType: "string",
+    name: "title",
+    type: "string"
+  }, {
+    indexed: false,
+    internalType: "string",
+    name: "description",
+    type: "string"
+  }, {
+    indexed: false,
     internalType: "address[]",
     name: "targets",
     type: "address[]"
@@ -1931,11 +1940,6 @@ var _abi = [{
     internalType: "address",
     name: "strategy",
     type: "address"
-  }, {
-    indexed: false,
-    internalType: "bytes32",
-    name: "ipfsHash",
-    type: "bytes32"
   }],
   name: "ProposalCreated",
   type: "event"
@@ -2046,6 +2050,14 @@ var _abi = [{
     name: "executor",
     type: "address"
   }, {
+    internalType: "string",
+    name: "title",
+    type: "string"
+  }, {
+    internalType: "string",
+    name: "description",
+    type: "string"
+  }, {
     internalType: "address[]",
     name: "targets",
     type: "address[]"
@@ -2065,10 +2077,6 @@ var _abi = [{
     internalType: "bool[]",
     name: "withDelegatecalls",
     type: "bool[]"
-  }, {
-    internalType: "bytes32",
-    name: "ipfsHash",
-    type: "bytes32"
   }],
   name: "create",
   outputs: [{
@@ -2129,6 +2137,14 @@ var _abi = [{
       name: "executor",
       type: "address"
     }, {
+      internalType: "string",
+      name: "title",
+      type: "string"
+    }, {
+      internalType: "string",
+      name: "description",
+      type: "string"
+    }, {
       internalType: "address[]",
       name: "targets",
       type: "address[]"
@@ -2180,10 +2196,6 @@ var _abi = [{
       internalType: "address",
       name: "strategy",
       type: "address"
-    }, {
-      internalType: "bytes32",
-      name: "ipfsHash",
-      type: "bytes32"
     }],
     internalType: "struct IAaveGovernanceV2.ProposalWithoutVotes",
     name: "",
@@ -2963,6 +2975,14 @@ var _abi$8 = [{
       name: "executor",
       type: "address"
     }, {
+      internalType: "string",
+      name: "title",
+      type: "string"
+    }, {
+      internalType: "string",
+      name: "description",
+      type: "string"
+    }, {
       internalType: "address[]",
       name: "targets",
       type: "address[]"
@@ -3014,10 +3034,6 @@ var _abi$8 = [{
       internalType: "address",
       name: "strategy",
       type: "address"
-    }, {
-      internalType: "bytes32",
-      name: "ipfsHash",
-      type: "bytes32"
     }, {
       internalType: "enum IAaveGovernanceV2.ProposalState",
       name: "proposalState",
@@ -3078,6 +3094,14 @@ var _abi$8 = [{
       name: "executor",
       type: "address"
     }, {
+      internalType: "string",
+      name: "title",
+      type: "string"
+    }, {
+      internalType: "string",
+      name: "description",
+      type: "string"
+    }, {
       internalType: "address[]",
       name: "targets",
       type: "address[]"
@@ -3129,10 +3153,6 @@ var _abi$8 = [{
       internalType: "address",
       name: "strategy",
       type: "address"
-    }, {
-      internalType: "bytes32",
-      name: "ipfsHash",
-      type: "bytes32"
     }, {
       internalType: "enum IAaveGovernanceV2.ProposalState",
       name: "proposalState",
@@ -6748,113 +6768,21 @@ var ProposalState;
   ProposalState["Executed"] = "Executed";
 })(ProposalState || (ProposalState = {}));
 
-var ipfsEndpoint = 'https://cloudflare-ipfs.com/ipfs';
-function getLink(hash) {
-  return ipfsEndpoint + "/" + hash;
-}
-var MEMORIZE = {};
-function getProposalMetadata(_x) {
-  return _getProposalMetadata.apply(this, arguments);
-}
-
-function _getProposalMetadata() {
-  _getProposalMetadata = _asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(hash) {
-    var ipfsHash, _yield$axios$get, data;
-
-    return runtime_1.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            ipfsHash = base58.encode(Buffer.from("1220" + hash.slice(2), 'hex'));
-
-            if (!MEMORIZE[ipfsHash]) {
-              _context.next = 3;
-              break;
-            }
-
-            return _context.abrupt("return", MEMORIZE[ipfsHash]);
-
-          case 3:
-            _context.prev = 3;
-            _context.next = 6;
-            return axios.get(getLink(ipfsHash), {
-              timeout: 2000
-            });
-
-          case 6:
-            _yield$axios$get = _context.sent;
-            data = _yield$axios$get.data;
-
-            if (data != null && data.title) {
-              _context.next = 10;
-              break;
-            }
-
-            throw Error('Missing title field at proposal metadata.');
-
-          case 10:
-            if (data != null && data.description) {
-              _context.next = 12;
-              break;
-            }
-
-            throw Error('Missing description field at proposal metadata.');
-
-          case 12:
-            if (data != null && data.shortDescription) {
-              _context.next = 14;
-              break;
-            }
-
-            throw Error('Missing shortDescription field at proposal metadata.');
-
-          case 14:
-            MEMORIZE[ipfsHash] = {
-              ipfsHash: ipfsHash,
-              title: data.title,
-              description: data.description,
-              shortDescription: data.shortDescription
-            };
-            return _context.abrupt("return", MEMORIZE[ipfsHash]);
-
-          case 18:
-            _context.prev = 18;
-            _context.t0 = _context["catch"](3);
-            console.error("@aave/protocol-js: IPFS fetch Error: " + _context.t0.message);
-            return _context.abrupt("return", {
-              ipfsHash: ipfsHash,
-              title: "Proposal - " + ipfsHash,
-              description: "Proposal with invalid metadata format or IPFS gateway is down",
-              shortDescription: "Proposal with invalid metadata format or IPFS gateway is down"
-            });
-
-          case 22:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[3, 18]]);
-  }));
-  return _getProposalMetadata.apply(this, arguments);
-}
-
 var parseProposal = /*#__PURE__*/function () {
   var _ref = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee(rawProposal) {
-    var id, creator, executor, targets, values, signatures, calldatas, withDelegatecalls, startBlock, endBlock, executionTime, forVotes, againstVotes, executed, canceled, strategy, ipfsHex, totalVotingSupply, minimumQuorum, minimumDiff, executionTimeWithGracePeriod, proposalCreated, proposalState, proposalMetadata, proposal;
+    var id, creator, executor, title, description, targets, values, signatures, calldatas, withDelegatecalls, startBlock, endBlock, executionTime, forVotes, againstVotes, executed, canceled, strategy, totalVotingSupply, minimumQuorum, minimumDiff, executionTimeWithGracePeriod, proposalCreated, proposalState, proposal;
     return runtime_1.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            id = rawProposal.id, creator = rawProposal.creator, executor = rawProposal.executor, targets = rawProposal.targets, values = rawProposal.values, signatures = rawProposal.signatures, calldatas = rawProposal.calldatas, withDelegatecalls = rawProposal.withDelegatecalls, startBlock = rawProposal.startBlock, endBlock = rawProposal.endBlock, executionTime = rawProposal.executionTime, forVotes = rawProposal.forVotes, againstVotes = rawProposal.againstVotes, executed = rawProposal.executed, canceled = rawProposal.canceled, strategy = rawProposal.strategy, ipfsHex = rawProposal.ipfsHash, totalVotingSupply = rawProposal.totalVotingSupply, minimumQuorum = rawProposal.minimumQuorum, minimumDiff = rawProposal.minimumDiff, executionTimeWithGracePeriod = rawProposal.executionTimeWithGracePeriod, proposalCreated = rawProposal.proposalCreated, proposalState = rawProposal.proposalState;
-            _context.next = 3;
-            return getProposalMetadata(ipfsHex);
+            id = rawProposal.id, creator = rawProposal.creator, executor = rawProposal.executor, title = rawProposal.title, description = rawProposal.description, targets = rawProposal.targets, values = rawProposal.values, signatures = rawProposal.signatures, calldatas = rawProposal.calldatas, withDelegatecalls = rawProposal.withDelegatecalls, startBlock = rawProposal.startBlock, endBlock = rawProposal.endBlock, executionTime = rawProposal.executionTime, forVotes = rawProposal.forVotes, againstVotes = rawProposal.againstVotes, executed = rawProposal.executed, canceled = rawProposal.canceled, strategy = rawProposal.strategy, totalVotingSupply = rawProposal.totalVotingSupply, minimumQuorum = rawProposal.minimumQuorum, minimumDiff = rawProposal.minimumDiff, executionTimeWithGracePeriod = rawProposal.executionTimeWithGracePeriod, proposalCreated = rawProposal.proposalCreated, proposalState = rawProposal.proposalState; // const proposalMetadata = await getProposalMetadata(ipfsHex);
 
-          case 3:
-            proposalMetadata = _context.sent;
             proposal = {
               id: Number(id.toString()),
               creator: creator,
               executor: executor,
+              title: title,
+              description: description,
               targets: targets,
               values: values,
               signatures: signatures,
@@ -6868,20 +6796,17 @@ var parseProposal = /*#__PURE__*/function () {
               executed: executed,
               canceled: canceled,
               strategy: strategy,
-              ipfsHash: proposalMetadata.ipfsHash,
               state: Object.values(ProposalState)[proposalState],
               minimumQuorum: minimumQuorum.toString(),
               minimumDiff: minimumDiff.toString(),
               executionTimeWithGracePeriod: executionTimeWithGracePeriod.toString(),
-              title: proposalMetadata.title,
-              description: proposalMetadata.description,
-              shortDescription: proposalMetadata.shortDescription,
+              // shortDescription: proposalMetadata.shortDescription,
               proposalCreated: Number(proposalCreated.toString()),
               totalVotingSupply: totalVotingSupply.toString()
             };
             return _context.abrupt("return", proposal);
 
-          case 6:
+          case 3:
           case "end":
             return _context.stop();
         }

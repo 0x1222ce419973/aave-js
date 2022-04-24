@@ -16,7 +16,7 @@ export type Proposal = {
   id: number;
   title: string;
   description: string;
-  shortDescription: string;
+  // shortDescription: string;
   creator: tEthereumAddress;
   executor: tEthereumAddress;
   targets: tEthereumAddress[];
@@ -33,7 +33,6 @@ export type Proposal = {
   executed: boolean;
   canceled: boolean;
   strategy: string;
-  ipfsHash: string;
   state: ProposalState;
   minimumQuorum: string;
   minimumDiff: string;
@@ -50,6 +49,8 @@ export type ProposalRPC = {
   id: BigNumber;
   creator: string;
   executor: string;
+  title: string;
+  description: string;
   targets: string[];
   values: BigNumber[];
   signatures: string[];
@@ -63,14 +64,13 @@ export type ProposalRPC = {
   executed: boolean;
   canceled: boolean;
   strategy: string;
-  ipfsHash: string;
   proposalState: number;
 };
 
 export type ProposalMetadata = {
   title: string;
   description: string;
-  shortDescription: string;
+  // shortDescription: string;
   ipfsHash: string;
 };
 

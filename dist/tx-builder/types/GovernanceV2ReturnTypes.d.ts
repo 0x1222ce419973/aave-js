@@ -14,7 +14,6 @@ export declare type Proposal = {
     id: number;
     title: string;
     description: string;
-    shortDescription: string;
     creator: tEthereumAddress;
     executor: tEthereumAddress;
     targets: tEthereumAddress[];
@@ -31,7 +30,6 @@ export declare type Proposal = {
     executed: boolean;
     canceled: boolean;
     strategy: string;
-    ipfsHash: string;
     state: ProposalState;
     minimumQuorum: string;
     minimumDiff: string;
@@ -47,6 +45,8 @@ export declare type ProposalRPC = {
     id: BigNumber;
     creator: string;
     executor: string;
+    title: string;
+    description: string;
     targets: string[];
     values: BigNumber[];
     signatures: string[];
@@ -60,13 +60,11 @@ export declare type ProposalRPC = {
     executed: boolean;
     canceled: boolean;
     strategy: string;
-    ipfsHash: string;
     proposalState: number;
 };
 export declare type ProposalMetadata = {
     title: string;
     description: string;
-    shortDescription: string;
     ipfsHash: string;
 };
 export declare type Power = {
