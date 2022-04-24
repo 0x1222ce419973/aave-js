@@ -75,6 +75,16 @@ const _abi = [
             type: "address",
           },
           {
+            internalType: "string",
+            name: "title",
+            type: "string"
+          },
+          {
+            internalType: "string",
+            name: "description",
+            type: "string"
+          },
+          {
             internalType: "address[]",
             name: "targets",
             type: "address[]",
@@ -138,11 +148,6 @@ const _abi = [
             internalType: "address",
             name: "strategy",
             type: "address",
-          },
-          {
-            internalType: "bytes32",
-            name: "ipfsHash",
-            type: "bytes32",
           },
           {
             internalType: "enum IAaveGovernanceV2.ProposalState",
@@ -221,6 +226,16 @@ const _abi = [
             type: "address",
           },
           {
+            internalType: "string",
+            name: "title",
+            type: "string"
+          },
+          {
+            internalType: "string",
+            name: "description",
+            type: "string"
+          },
+          {
             internalType: "address[]",
             name: "targets",
             type: "address[]",
@@ -284,11 +299,6 @@ const _abi = [
             internalType: "address",
             name: "strategy",
             type: "address",
-          },
-          {
-            internalType: "bytes32",
-            name: "ipfsHash",
-            type: "bytes32",
           },
           {
             internalType: "enum IAaveGovernanceV2.ProposalState",
