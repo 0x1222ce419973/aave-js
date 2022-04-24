@@ -464,13 +464,13 @@ export default class AaveGovernanceV2Service
   }
 
   @GovValidator
-  public async getTokensPower({ user, tokens, governance }: GovGetPower): Promise<Power[]> {
+  public async getTokensPower({ user, tokens }: GovGetPower): Promise<Power[]> {
     const { provider }: Configuration = this.config;
     const helper: IGovernanceV2Helper = IGovernanceV2Helper__factory.connect(
       this.aaveGovernanceV2HelperAddress,
       provider
     );
-    const power = helper.getTokensPower(user, tokens, governance);
+    const power = helper.getTokensPower(user, tokens);
     return power as Promise<Power[]>;
   }
 

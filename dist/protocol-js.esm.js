@@ -3173,10 +3173,6 @@ var _abi$8 = [{
     internalType: "address[]",
     name: "tokens",
     type: "address[]"
-  }, {
-    internalType: "address",
-    name: "governance",
-    type: "address"
   }],
   name: "getTokensPower",
   outputs: [{
@@ -7349,15 +7345,15 @@ var AaveGovernanceV2Service = /*#__PURE__*/function (_BaseService) {
 
   _proto.getTokensPower = /*#__PURE__*/function () {
     var _getTokensPower = /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/runtime_1.mark(function _callee16(_ref17) {
-      var user, tokens, governance, provider, helper, power;
+      var user, tokens, provider, helper, power;
       return runtime_1.wrap(function _callee16$(_context16) {
         while (1) {
           switch (_context16.prev = _context16.next) {
             case 0:
-              user = _ref17.user, tokens = _ref17.tokens, governance = _ref17.governance;
+              user = _ref17.user, tokens = _ref17.tokens;
               provider = this.config.provider;
               helper = IGovernanceV2Helper__factory.connect(this.aaveGovernanceV2HelperAddress, provider);
-              power = helper.getTokensPower(user, tokens, governance);
+              power = helper.getTokensPower(user, tokens);
               return _context16.abrupt("return", power);
 
             case 5:
