@@ -6752,7 +6752,7 @@ var ProposalState;
   ProposalState["Executed"] = "Executed";
 })(ProposalState || (ProposalState = {}));
 
-var ipfsEndpoint = 'https://cloudflare-ipfs.com/ipfs';
+var ipfsEndpoint = 'https://gateway.pinata.cloud/ipfs';
 function getLink(hash) {
   return ipfsEndpoint + "/" + hash;
 }

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { base58 } from 'ethers/lib/utils';
 import { ProposalMetadata } from '../types/GovernanceV2ReturnTypes';
 
-const ipfsEndpoint = 'https://cloudflare-ipfs.com/ipfs';
+const ipfsEndpoint = 'https://gateway.pinata.cloud/ipfs';
 
 export function getLink(hash: string): string {
   return `${ipfsEndpoint}/${hash}`;

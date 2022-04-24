@@ -6739,7 +6739,7 @@ tslib.__decorate([RepayWithCollateralValidator, tslib.__param(0, IsEthAddress('u
   ProposalState["Executed"] = "Executed";
 })(exports.ProposalState || (exports.ProposalState = {}));
 
-var ipfsEndpoint = 'https://cloudflare-ipfs.com/ipfs';
+var ipfsEndpoint = 'https://gateway.pinata.cloud/ipfs';
 function getLink(hash) {
   return ipfsEndpoint + "/" + hash;
 }
