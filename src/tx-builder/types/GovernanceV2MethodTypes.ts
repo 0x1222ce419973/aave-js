@@ -9,11 +9,12 @@ export enum ExecutorType {
 export type GovCreateType = {
   user: tEthereumAddress;
   targets: tEthereumAddress[];
+  title: string;
+  description: string;
   values: string[];
   signatures: string[];
   calldatas: BytesLike[];
   withDelegateCalls: boolean[];
-  ipfsHash: BytesLike;
   executor: ExecutorType;
 };
 export type GovCancelType = {
