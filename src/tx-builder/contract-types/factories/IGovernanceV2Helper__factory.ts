@@ -326,6 +326,11 @@ const _abi = [
         name: "tokens",
         type: "address[]",
       },
+      {
+        internalType: "address",
+        name: "governance",
+        type: "address",
+      },
     ],
     name: "getTokensPower",
     outputs: [

@@ -23,6 +23,6 @@ export default class AaveGovernanceV2Service extends BaseService<IAaveGovernance
     getVotingPowerAt({ user, block, strategy, }: GovGetVotingAtBlockType): Promise<string>;
     getTotalPropositionSupplyAt({ block, strategy, }: GovGetVotingSupplyType): Promise<string>;
     getTotalVotingSupplyAt({ block, strategy, }: GovGetVotingSupplyType): Promise<string>;
-    getTokensPower({ user, tokens }: GovGetPower): Promise<Power[]>;
+    getTokensPower({ user, tokens, governance }: GovGetPower): Promise<Power[]>;
     getVoteOnProposal({ proposalId, user, }: GovGetVoteOnProposal): Promise<Vote>;
 }
