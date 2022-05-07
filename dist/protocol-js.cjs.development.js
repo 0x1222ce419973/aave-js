@@ -945,6 +945,7 @@ var index$1 = {
   Network["ropsten"] = "ropsten";
   Network["kovan"] = "kovan";
   Network["baobab"] = "baobab";
+  Network["cypress"] = "cypress";
   Network["polygon"] = "polygon";
   Network["fork"] = "fork";
   Network["mumbai"] = "mumbai";
@@ -962,6 +963,7 @@ var index$1 = {
   ChainId[ChainId["kovan"] = 42] = "kovan";
   ChainId[ChainId["polygon"] = 137] = "polygon";
   ChainId[ChainId["baobab"] = 1001] = "baobab";
+  ChainId[ChainId["cypress"] = 8217] = "cypress";
   ChainId[ChainId["fork"] = 1337] = "fork";
   ChainId[ChainId["mumbai"] = 80001] = "mumbai";
   ChainId[ChainId["polygon_fork"] = 1338] = "polygon_fork";
